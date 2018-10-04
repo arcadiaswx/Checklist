@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Checklist
 //
-//  Created by Brian on 6/18/18.
-//  Copyright © 2018 Razeware. All rights reserved.
+//  Created by Craig Booker on 6/18/18.
+//  Copyright © 2018 Arcadia Softworks, LLC. All rights reserved.
 //
 
 import UIKit
