@@ -10,6 +10,16 @@ import UIKit
 
 class ChecklistViewController: UITableViewController {
 
+    @IBAction func addItem(_ sender: Any) {
+        //print("Added Item")
+        let newRowIndex = todoList.todos.count
+        _ = todoList.newTodo()
+        
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        let indexPaths = [indexPath]
+        tableView.insertRows(at: indexPaths, with: .automatic)
+    }
+    
     var todoList: TodoList
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,6 +52,14 @@ class ChecklistViewController: UITableViewController {
             tableView.deselectRow(at: indexPath, animated: true)
       }
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        todoList.todos.remove(at: indexPath.row)
+        let indexPaths = [indexPath]
+        tableView.deleteRows(at: indexPaths, with: .automatic)
+    }
+    
     func configureText(for cell:UITableViewCell, with item: CheckListItem){
         if let label = cell.viewWithTag(1000) as? UILabel {
             label.text = item.text
@@ -50,9 +68,9 @@ class ChecklistViewController: UITableViewController {
     
     func configureCheckmark(for cell:UITableViewCell, with item: CheckListItem) {
         if item.checked {
-          cell.accessoryType = .none
-        } else {
           cell.accessoryType = .checkmark
+        } else {
+          cell.accessoryType = .none
         }
         item.toggleChecked()
     }
