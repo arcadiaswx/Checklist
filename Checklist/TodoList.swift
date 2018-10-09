@@ -11,14 +11,15 @@ import Foundation
 
 class TodoList {
     
-    var todos: [CheckListItem] = []
+    var todos: [ChecklistItem] = []
     
     init() {
-        let row0Item = CheckListItem()
-        let row1Item = CheckListItem()
-        let row2Item = CheckListItem()
-        let row3Item = CheckListItem()
-        let row4Item = CheckListItem()
+        
+        let row0Item = ChecklistItem()
+        let row1Item = ChecklistItem()
+        let row2Item = ChecklistItem()
+        let row3Item = ChecklistItem()
+        let row4Item = ChecklistItem()
         
         row0Item.text = "Take a jog"
         row1Item.text = "Watch a Movie"
@@ -32,12 +33,29 @@ class TodoList {
         todos.append(row3Item)
         todos.append(row4Item)
     }
-    func newTodo() -> CheckListItem {
-        let item = CheckListItem()
-        item.text = "New todo item"
+    
+    func newTodo() -> ChecklistItem {
+        let item = ChecklistItem()
+        item.text = randomTitle()
         item.checked = true
         todos.append(item)
         return item
+    }
+    
+    func move(item: ChecklistItem, to index: Int) {
+        guard let currentIndex = todos.index(of: item) else {
+            return
+        }
+        todos.remove(at: currentIndex)
+        todos.insert(item, at: index)
+    }
+    
+    func remove(items: [ChecklistItem]) {
+        for item in items {
+            if let index = todos.index(of: item) {
+                todos.remove(at: index)
+            }
+        }
     }
     
     private func randomTitle() -> String {

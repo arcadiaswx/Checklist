@@ -17,17 +17,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ChecklistItem" id="B8c-m0-Iaw">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="ChecklistItem" id="B8c-m0-Iaw" customClass="ChecklistTableViewCell" customModule="Checklist" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="B8c-m0-Iaw" id="WK4-ra-pXi">
-                                    <rect key="frame" x="0.0" y="0.0" width="335" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="√" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8re-0E-Ugv">
+                                            <rect key="frame" x="15" y="12" width="15" height="24"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBD-yB-8oc">
-                                            <rect key="frame" x="20" y="11" width="295" height="21"/>
+                                            <rect key="frame" x="44" y="12" width="263" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" priority="750" constant="335" id="4qn-Zq-yXt"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="263" id="4qn-Zq-yXt"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -35,12 +41,22 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="yBD-yB-8oc" firstAttribute="top" secondItem="WK4-ra-pXi" secondAttribute="top" priority="750" constant="11" id="GhZ-D0-3yT"/>
-                                        <constraint firstAttribute="trailing" secondItem="yBD-yB-8oc" secondAttribute="trailing" constant="20" symbolic="YES" id="YI9-lq-52z"/>
-                                        <constraint firstItem="yBD-yB-8oc" firstAttribute="leading" secondItem="WK4-ra-pXi" secondAttribute="leading" constant="20" symbolic="YES" id="fmb-87-InV"/>
-                                        <constraint firstAttribute="bottom" secondItem="yBD-yB-8oc" secondAttribute="bottom" constant="11.5" id="rZJ-x8-v5q"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="8re-0E-Ugv" secondAttribute="bottom" constant="-3" id="3Oj-Jo-my1"/>
+                                        <constraint firstItem="8re-0E-Ugv" firstAttribute="top" secondItem="WK4-ra-pXi" secondAttribute="topMargin" constant="1" id="ANh-ux-tnK"/>
+                                        <constraint firstItem="yBD-yB-8oc" firstAttribute="top" secondItem="WK4-ra-pXi" secondAttribute="top" priority="750" constant="12" id="GhZ-D0-3yT"/>
+                                        <constraint firstItem="8re-0E-Ugv" firstAttribute="leading" secondItem="WK4-ra-pXi" secondAttribute="leading" constant="15" id="Kob-vu-hQb"/>
+                                        <constraint firstAttribute="trailing" secondItem="yBD-yB-8oc" secondAttribute="trailing" id="YI9-lq-52z"/>
+                                        <constraint firstItem="yBD-yB-8oc" firstAttribute="leading" secondItem="WK4-ra-pXi" secondAttribute="leading" constant="44" id="fmb-87-InV"/>
+                                        <constraint firstItem="yBD-yB-8oc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8re-0E-Ugv" secondAttribute="trailing" constant="8" symbolic="YES" id="p7Z-qn-z4m"/>
+                                        <constraint firstAttribute="bottom" secondItem="yBD-yB-8oc" secondAttribute="bottom" constant="10.5" id="rZJ-x8-v5q"/>
+                                        <constraint firstItem="8re-0E-Ugv" firstAttribute="top" secondItem="yBD-yB-8oc" secondAttribute="top" id="wkU-Em-iKl"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="checkmarkLabel" destination="8re-0E-Ugv" id="Hvc-3a-rgR"/>
+                                    <outlet property="todoTextLabel" destination="yBD-yB-8oc" id="JqU-ar-PUr"/>
+                                    <segue destination="Wer-jG-6Is" kind="show" identifier="EditItemSegue" trigger="accessoryAction" id="GeH-d6-VS8"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -49,22 +65,30 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Checklists" id="ZQS-Me-RxK">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="W9F-JF-uGE">
-                            <connections>
-                                <segue destination="Wer-jG-6Is" kind="show" id="xW3-0j-FDW"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="W9F-JF-uGE">
+                                <connections>
+                                    <action selector="addItem:" destination="ewa-4u-uF2" id="UAW-cN-FDI"/>
+                                    <segue destination="Wer-jG-6Is" kind="show" identifier="AddItemSegue" id="xW3-0j-FDW"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Delete" id="EF1-Nd-sHP">
+                                <connections>
+                                    <action selector="deleteItems:" destination="ewa-4u-uF2" id="qfw-UJ-B6z"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vcu-wd-dG8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="881" y="142"/>
+            <point key="canvasLocation" x="880.79999999999995" y="141.67916041979012"/>
         </scene>
         <!--Title-->
         <scene sceneID="icK-s2-zCu">
             <objects>
-                <tableViewController id="Wer-jG-6Is" customClass="AddItemTableViewController" customModule="Checklist" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Wer-jG-6Is" customClass="ItemDetailViewController" customModule="Checklist" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="E37-hj-3SY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,6 +110,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
+                                                        <action selector="done:" destination="Wer-jG-6Is" eventType="editingDidEndOnExit" id="NUg-x2-MCM"/>
                                                         <outlet property="delegate" destination="Wer-jG-6Is" id="Psh-3g-5kj"/>
                                                     </connections>
                                                 </textField>
@@ -103,17 +128,19 @@
                     <navigationItem key="navigationItem" title="Title" id="hfp-nT-TAI">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="Qfd-6t-GCJ">
                             <connections>
-                                <action selector="cancelAddItem:" destination="Wer-jG-6Is" id="yjf-O3-Do6"/>
+                                <action selector="cancel:" destination="Wer-jG-6Is" id="Vo1-cc-mnh"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="A6d-sR-YAP">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Done" id="A6d-sR-YAP">
                             <connections>
                                 <action selector="done:" destination="Wer-jG-6Is" id="o1V-3H-Yg7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="textField" destination="gWe-8P-2mH" id="b1B-QW-J8e"/>
+                        <outlet property="addBarButton" destination="A6d-sR-YAP" id="4Uw-3j-Biv"/>
+                        <outlet property="cancelBarButton" destination="Qfd-6t-GCJ" id="Oga-Nd-nZq"/>
+                        <outlet property="textfield" destination="gWe-8P-2mH" id="2lK-wS-Nup"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="civ-cF-s8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -139,4 +166,7 @@
             <point key="canvasLocation" x="76" y="141.67916041979012"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="GeH-d6-VS8"/>
+    </inferredMetricsTieBreakers>
 </document>
